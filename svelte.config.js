@@ -4,7 +4,7 @@ import { mdsvex } from 'mdsvex';
 import rehypeSlug from 'rehype-slug';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
-import { highlighter } from './src/lib/shiki-highlighter.ts';
+import { highlighter } from './src/lib/shiki-highlighter.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

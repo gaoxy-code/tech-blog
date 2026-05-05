@@ -25,7 +25,7 @@ const highlighterPromise = createHighlighter({
 	]
 });
 
-export async function highlighter(code: string, lang: string | undefined) {
+export async function highlighter(code, lang) {
 	const shiki = await highlighterPromise;
 
 	const html = shiki.codeToHtml(code, {

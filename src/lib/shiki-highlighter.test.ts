@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { highlighter } from './shiki-highlighter';
+import { highlighter } from './shiki-highlighter.js';
 
 describe('highlighter', () => {
 	it('shiki が生成する pre/code を返す', async () => {
