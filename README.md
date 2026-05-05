@@ -64,7 +64,7 @@ draft: true # 省略可。true にすると一覧・検索から除外される
 export const siteConfig = {
 	title: "toishi's blog",
 	description: 'SvelteKit で作った技術ブログ',
-	url: 'https://toishi.dev'
+	url: 'https://blog.toishi.dev'
 } as const;
 ```
 

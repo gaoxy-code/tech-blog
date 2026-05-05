@@ -2,4 +2,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://toishi.dev/sitemap.xml
+Sitemap: https://blog.toishi.dev/sitemap.xml
