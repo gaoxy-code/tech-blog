@@ -1,0 +1,276 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn-svelte/tailwind.css';
+@import '@fontsource-variable/geist';
+
+@custom-variant dark (&:is(.dark *));
+@plugin '@tailwindcss/typography';
+
+:root {
+	--navbar-height: 65px;
+	--background: oklch(1 0 0);
+	--foreground: oklch(0.145 0 0);
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.145 0 0);
+	--popover: oklch(1 0 0);
+	--popover-foreground: oklch(0.145 0 0);
+	--primary: oklch(0.45 0.16 155);
+	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(0.97 0.01 155);
+	--secondary-foreground: oklch(0.205 0 0);
+	--muted: oklch(0.97 0 0);
+	--muted-foreground: oklch(0.556 0 0);
+	--accent: oklch(0.92 0.04 155);
+	--accent-foreground: oklch(0.205 0 0);
+	--destructive: oklch(0.577 0.245 27.325);
+	--border: oklch(0.922 0 0);
+	--input: oklch(0.922 0 0);
+	--ring: oklch(0.55 0.14 155);
+	--chart-1: oklch(0.87 0 0);
+	--chart-2: oklch(0.556 0 0);
+	--chart-3: oklch(0.439 0 0);
+	--chart-4: oklch(0.371 0 0);
+	--chart-5: oklch(0.269 0 0);
+	--radius: 0.625rem;
+	--sidebar: oklch(0.985 0 0);
+	--sidebar-foreground: oklch(0.145 0 0);
+	--sidebar-primary: oklch(0.45 0.16 155);
+	--sidebar-primary-foreground: oklch(0.985 0 0);
+	--sidebar-accent: oklch(0.92 0.04 155);
+	--sidebar-accent-foreground: oklch(0.205 0 0);
+	--sidebar-border: oklch(0.922 0 0);
+	--sidebar-ring: oklch(0.55 0.14 155);
+}
+
+.dark {
+	--background: oklch(0.145 0 0);
+	--foreground: oklch(0.985 0 0);
+	--card: oklch(0.205 0 0);
+	--card-foreground: oklch(0.985 0 0);
+	--popover: oklch(0.205 0 0);
+	--popover-foreground: oklch(0.985 0 0);
+	--primary: oklch(0.65 0.18 155);
+	--primary-foreground: oklch(0.145 0 0);
+	--secondary: oklch(0.269 0.02 155);
+	--secondary-foreground: oklch(0.985 0 0);
+	--muted: oklch(0.269 0 0);
+	--muted-foreground: oklch(0.708 0 0);
+	--accent: oklch(0.3 0.04 155);
+	--accent-foreground: oklch(0.985 0 0);
+	--destructive: oklch(0.704 0.191 22.216);
+	--border: oklch(1 0 0 / 10%);
+	--input: oklch(1 0 0 / 15%);
+	--ring: oklch(0.6 0.15 155);
+	--chart-1: oklch(0.87 0 0);
+	--chart-2: oklch(0.556 0 0);
+	--chart-3: oklch(0.439 0 0);
+	--chart-4: oklch(0.371 0 0);
+	--chart-5: oklch(0.269 0 0);
+	--sidebar: oklch(0.205 0 0);
+	--sidebar-foreground: oklch(0.985 0 0);
+	--sidebar-primary: oklch(0.65 0.18 155);
+	--sidebar-primary-foreground: oklch(0.145 0 0);
+	--sidebar-accent: oklch(0.3 0.04 155);
+	--sidebar-accent-foreground: oklch(0.985 0 0);
+	--sidebar-border: oklch(1 0 0 / 10%);
+	--sidebar-ring: oklch(0.6 0.15 155);
+}
+
+@theme inline {
+	--font-sans: 'Geist Variable', sans-serif;
+	--color-sidebar-ring: var(--sidebar-ring);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar: var(--sidebar);
+	--color-chart-5: var(--chart-5);
+	--color-chart-4: var(--chart-4);
+	--color-chart-3: var(--chart-3);
+	--color-chart-2: var(--chart-2);
+	--color-chart-1: var(--chart-1);
+	--color-ring: var(--ring);
+	--color-input: var(--input);
+	--color-border: var(--border);
+	--color-destructive: var(--destructive);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent: var(--accent);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-muted: var(--muted);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary: var(--secondary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary: var(--primary);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-popover: var(--popover);
+	--color-card-foreground: var(--card-foreground);
+	--color-card: var(--card);
+	--color-foreground: var(--foreground);
+	--color-background: var(--background);
+	--radius-sm: calc(var(--radius) * 0.6);
+	--radius-md: calc(var(--radius) * 0.8);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) * 1.4);
+	--radius-2xl: calc(var(--radius) * 1.8);
+	--radius-3xl: calc(var(--radius) * 2.2);
+	--radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* View Transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 300ms;
+}
+
+::view-transition-old(post-cover),
+::view-transition-new(post-cover),
+::view-transition-old(post-title),
+::view-transition-new(post-title) {
+	animation-duration: 350ms;
+}
+
+/* sticky ヘッダーは遷移間で見た目がほぼ同じなのでアニメーションを無効化し、
+   常に表示され続けるように見せる（root 遷移に巻き込まれて消えるのを防ぐ） */
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+	animation: none;
+}
+
+/* Shiki syntax highlighting - inverted theme for contrast */
+html:not(.dark) .shiki,
+html:not(.dark) .shiki span {
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
+}
+
+html.dark .shiki,
+html.dark .shiki span {
+	color: var(--shiki-light) !important;
+	background-color: var(--shiki-light-bg) !important;
+}
+
+.shiki {
+	border-radius: var(--radius);
+	padding: 1rem 1.25rem;
+	overflow-x: auto;
+	font-size: 0.875rem;
+	line-height: 1.7;
+}
+
+/* Override prose code block styles */
+.prose pre {
+	margin: 1.5rem 0;
+	background: transparent;
+}
+
+.prose pre code {
+	font-size: inherit;
+}
+
+/* Copy button for code blocks */
+.prose .code-copy-wrapper {
+	position: relative;
+}
+
+.prose .code-copy-wrapper .code-copy-btn {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	padding: 0;
+	border-radius: 0.375rem;
+	border: 1px solid transparent;
+	background: transparent;
+	color: var(--muted-foreground);
+	cursor: pointer;
+	opacity: 0;
+	appearance: none;
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: transparent;
+	transition:
+		opacity 0.2s,
+		color 0.2s;
+}
+
+.prose .code-copy-wrapper .code-copy-btn:focus {
+	outline: none;
+}
+
+.prose .code-copy-wrapper .code-copy-btn:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 2px;
+}
+
+/* ホバーが使えるデバイス（PC）: ホバー時に表示 */
+@media (hover: hover) {
+	.prose .code-copy-wrapper:hover .code-copy-btn,
+	.prose .code-copy-wrapper .code-copy-btn:focus-visible {
+		opacity: 1;
+	}
+}
+
+/* タッチデバイス（スマホ・タブレット）: 常時表示 */
+@media (hover: none) {
+	.prose .code-copy-wrapper .code-copy-btn {
+		opacity: 1;
+	}
+}
+
+.prose .code-copy-wrapper .code-copy-btn:hover {
+	background: var(--muted);
+	border-color: var(--border);
+	color: var(--foreground);
+}
+
+.prose .code-copy-wrapper .code-copy-btn.copied {
+	opacity: 1;
+	color: var(--primary);
+}
+
+/* 長い URL やテキストで横スクロールが発生しないように折り返す（コードブロックは .shiki の overflow-x で対応） */
+.prose {
+	overflow-wrap: anywhere;
+}
+
+.prose :where(img, video) {
+	max-width: 100%;
+	height: auto;
+}
+
+/* テーブルはコンテナ内でスクロールさせる */
+.prose :where(table) {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+	html {
+		@apply font-sans;
+		overflow-x: clip;
+	}
+	/* anchor link 経由の遷移時のみスムーズスクロールを有効化する。
+	   html 全体に scroll-behavior: smooth を掛けると、ページ遷移時の
+	   scrollTo(0,0) まで滑らかになり、View Transition と干渉して
+	   「ヘッダーが一瞬消えて top まで滑らかにスクロールする」現象が起きる。 */
+	html:has(:target) {
+		scroll-behavior: smooth;
+	}
+	body {
+		@apply bg-background text-foreground;
+		overflow-x: clip;
+	}
+	:target {
+		scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+	}
+}

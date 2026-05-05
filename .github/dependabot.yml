@@ -1,0 +1,44 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '09:00'
+      timezone: Asia/Tokyo
+    groups:
+      svelte:
+        patterns:
+          - 'svelte*'
+          - '@sveltejs/*'
+      eslint:
+        patterns:
+          - 'eslint*'
+          - '@eslint/*'
+          - 'typescript-eslint'
+      prettier:
+        patterns:
+          - 'prettier*'
+      tailwind:
+        patterns:
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+          - 'tw-animate-css'
+      vitest:
+        patterns:
+          - 'vitest*'
+          - '@vitest/*'
+          - 'playwright'
+          - 'vitest-browser-svelte'
+      types:
+        patterns:
+          - '@types/*'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '09:00'
+      timezone: Asia/Tokyo
