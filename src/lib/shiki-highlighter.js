@@ -25,6 +25,10 @@ const highlighterPromise = createHighlighter({
 	]
 });
 
+/**
+ * @param {string} code
+ * @param {string} [lang]
+ */
 export async function highlighter(code, lang) {
 	const shiki = await highlighterPromise;
 
