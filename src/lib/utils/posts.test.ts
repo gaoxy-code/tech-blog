@@ -1,4 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+vi.mock('$lib/data/views.json', () => {
+	const modules = import.meta.glob('/src/posts/*.md', { eager: true });
+	const views: Record<string, number> = {};
+	const paths = Object.keys(modules);
+	paths.forEach((path, i) => {
+		const slug = path.split('/').pop()!.replace('.md', '');
+		views[slug] = (paths.length - i) * 10;
+	});
+	return { default: views };
+});
+
 import { getAllPosts, getPopularPosts, getAllTags } from './posts';
 
 describe('getAllPosts', () => {
