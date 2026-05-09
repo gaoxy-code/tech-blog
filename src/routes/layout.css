@@ -169,6 +169,23 @@ html.dark .shiki span {
 	font-size: inherit;
 }
 
+/* インラインコード（コードブロック内の <code> は除外）。
+   @tailwindcss/typography が ::before/::after でバッククォートを挿入するため除去し、
+   一般的なブログ風の装飾を当てる */
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+	content: none;
+}
+
+.prose :not(pre) > code {
+	background: var(--muted);
+	color: var(--foreground);
+	padding: 0.125rem 0.375rem;
+	border-radius: 0.25rem;
+	font-size: 0.875em;
+	font-weight: 500;
+}
+
 /* Copy button for code blocks */
 .prose .code-copy-wrapper {
 	position: relative;
