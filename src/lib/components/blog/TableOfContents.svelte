@@ -76,45 +76,43 @@
 
 <!-- Desktop sidebar only – mobile version is rendered in post.svelte header -->
 {#if toc.length > 0}
-	<aside class="hidden w-60 shrink-0 xl:block">
-		<div class="sticky top-20 rounded-xl border border-border">
-			<Accordion.Root type="single" value="toc">
-				<Accordion.Item value="toc" class="border-none">
-					<Accordion.Trigger
-						class="px-6 py-4 text-sm font-semibold tracking-wider text-muted-foreground uppercase"
+	<div class="rounded-xl border border-border">
+		<Accordion.Root type="single" value="toc">
+			<Accordion.Item value="toc" class="border-none">
+				<Accordion.Trigger
+					class="px-6 py-4 text-sm font-semibold tracking-wider text-muted-foreground uppercase"
+				>
+					目次
+				</Accordion.Trigger>
+				<Accordion.Content class="px-6">
+					<nav
+						class="max-h-[calc(100vh-12rem)] space-y-0.5 overflow-y-auto"
+						aria-label="Table of contents"
+						bind:this={tocNavEl}
 					>
-						目次
-					</Accordion.Trigger>
-					<Accordion.Content class="px-6">
-						<nav
-							class="max-h-[calc(100vh-12rem)] space-y-0.5 overflow-y-auto"
-							aria-label="Table of contents"
-							bind:this={tocNavEl}
-						>
-							{#each toc as item, i (item.id || i)}
-								{@const isH3 = item.level === 3}
-								{@const parentId = isH3 ? getParentH2Id(item) : ''}
-								{@const isVisible = !isH3 || parentId === activeSectionId}
-								{@const isActive = activeId === item.id}
-								{#if isVisible}
-									<a
-										href="#{item.id}"
-										data-toc-id={item.id}
-										aria-current={isActive ? 'true' : undefined}
-										class="block border-l-2 py-0.5 text-sm transition-colors
-											{isH3 ? 'pl-5' : 'pl-3'}
-											{isActive
-											? 'border-primary font-medium text-foreground'
-											: 'border-transparent text-muted-foreground hover:border-border hover:text-foreground'}"
-									>
-										{item.text}
-									</a>
-								{/if}
-							{/each}
-						</nav>
-					</Accordion.Content>
-				</Accordion.Item>
-			</Accordion.Root>
-		</div>
-	</aside>
+						{#each toc as item, i (item.id || i)}
+							{@const isH3 = item.level === 3}
+							{@const parentId = isH3 ? getParentH2Id(item) : ''}
+							{@const isVisible = !isH3 || parentId === activeSectionId}
+							{@const isActive = activeId === item.id}
+							{#if isVisible}
+								<a
+									href="#{item.id}"
+									data-toc-id={item.id}
+									aria-current={isActive ? 'true' : undefined}
+									class="block border-l-2 py-0.5 text-sm transition-colors
+									{isH3 ? 'pl-5' : 'pl-3'}
+									{isActive
+										? 'border-primary font-medium text-foreground'
+										: 'border-transparent text-muted-foreground hover:border-border hover:text-foreground'}"
+								>
+									{item.text}
+								</a>
+							{/if}
+						{/each}
+					</nav>
+				</Accordion.Content>
+			</Accordion.Item>
+		</Accordion.Root>
+	</div>
 {/if}

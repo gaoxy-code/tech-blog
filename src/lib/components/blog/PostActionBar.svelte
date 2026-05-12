@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="mt-6 flex justify-end gap-3">
+<div class="mt-6 flex justify-center gap-3 sm:justify-end">
 	<button
 		onclick={copyMarkdown}
 		class="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"

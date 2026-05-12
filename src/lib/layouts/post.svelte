@@ -4,6 +4,7 @@
 	import { Calendar, Clock, ArrowLeft } from '@lucide/svelte';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import Separator from '@/components/ui/separator/separator.svelte';
+	import AuthorCard from '$lib/components/blog/AuthorCard.svelte';
 	import PostCard from '$lib/components/blog/PostCard.svelte';
 	import PostActionBar from '$lib/components/blog/PostActionBar.svelte';
 	import PostNavigation from '$lib/components/blog/PostNavigation.svelte';
@@ -159,12 +160,24 @@
 			{@render children()}
 		</article>
 
-		<!-- Desktop ToC Sidebar -->
-		<TableOfContents {articleEl} bind:toc bind:activeId />
+		<!-- Desktop ToC + 著者カード Sidebar -->
+		<aside class="hidden w-60 shrink-0 xl:block">
+			<div class="sticky top-20 flex flex-col gap-3">
+				<TableOfContents {articleEl} bind:toc bind:activeId />
+				<AuthorCard variant="sidebar" />
+			</div>
+		</aside>
+	</div>
+
+	<!-- 記事末尾ブロック -->
+	<Separator class="mt-12" />
+
+	<!-- 著者情報カード (mobile only) -->
+	<div class="mt-8 xl:hidden">
+		<AuthorCard variant="inline" />
 	</div>
 
 	<!-- アクションバー -->
-	<Separator class="mt-12" />
 	<PostActionBar {rawMarkdown} title={title ?? ''} />
 
 	<!-- 前後の記事ナビゲーション -->
