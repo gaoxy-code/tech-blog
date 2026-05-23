@@ -66,7 +66,15 @@ if (json.errors) {
 	process.exit(0);
 }
 
-const groups = json?.data?.viewer?.accounts?.[0]?.rumPageloadEventsAdaptiveGroups ?? [];
+const accounts = json?.data?.viewer?.accounts ?? [];
+const groups = accounts[0]?.rumPageloadEventsAdaptiveGroups ?? [];
+
+console.log(`[fetch-views][debug] since=${since} accountTagPrefix=${accountId.slice(0, 6)}... siteTagPrefix=${siteTag.slice(0, 6)}...`);
+console.log(`[fetch-views][debug] accounts.length=${accounts.length} groups.length=${groups.length}`);
+if (groups.length > 0) {
+	const sample = groups.slice(0, 10).map((g) => `${g.dimensions.requestPath} (${g.count})`);
+	console.log('[fetch-views][debug] sample paths:', sample);
+}
 
 const counts = {};
 for (const g of groups) {
