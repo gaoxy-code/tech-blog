@@ -37,7 +37,7 @@ Expo を使っている場合は `@expo/vector-icons` という薄いラッパ�
 import { MaterialIcons } from '@expo/vector-icons';
 
 export function HomeButton() {
-  return <MaterialIcons name="home" size={24} color="black" />;
+	return <MaterialIcons name="home" size={24} color="black" />;
 }
 ```
 
@@ -59,7 +59,7 @@ cd ios && pod install
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export function HomeButton() {
-  return <Icon name="home" size={24} color="black" />;
+	return <Icon name="home" size={24} color="black" />;
 }
 ```
 

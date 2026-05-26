@@ -82,7 +82,7 @@
 <section class="border-t border-border bg-muted/20">
 	<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
 		<div class="mb-8 flex items-center justify-between">
-			<h2 class="text-xl font-bold sm:text-2xl">人気の記事</h2>
+			<h2 class="text-xl font-bold sm:text-2xl">最近読まれている記事</h2>
 			<a
 				href="/posts"
 				class="text-sm text-muted-foreground transition-colors hover:text-foreground"

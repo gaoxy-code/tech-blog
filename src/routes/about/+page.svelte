@@ -62,10 +62,10 @@
 		}
 	];
 
-	function formatViews(n: number): string {
-		if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-		return String(n);
-	}
+	// function formatViews(n: number): string {
+	// 	if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+	// 	return n.toString();
+	// }
 </script>
 
 <Seo title="About" description="toishi — Frontend Engineer" />
@@ -136,7 +136,7 @@
 				</div>
 
 				<!-- Stats -->
-				<div class="grid grid-cols-3 border-b border-border py-4">
+				<div class="grid grid-cols-2 border-b border-border py-4">
 					<div class="flex flex-col items-center gap-0.5 p-2">
 						<span class="font-mono text-lg font-bold tracking-tight text-foreground"
 							>{data.postCount}</span
@@ -149,12 +149,12 @@
 						>
 						<span class="text-[10px] tracking-[0.04em] text-muted-foreground">タグ</span>
 					</div>
-					<div class="flex flex-col items-center gap-0.5 border-l border-border p-2">
+					<!-- <div class="flex flex-col items-center gap-0.5 border-l border-border p-2">
 						<span class="font-mono text-lg font-bold tracking-tight text-primary"
 							>{formatViews(data.totalViews)}</span
 						>
 						<span class="text-[10px] tracking-[0.04em] text-muted-foreground">ビュー</span>
-					</div>
+					</div> -->
 				</div>
 
 				<!-- Social -->
