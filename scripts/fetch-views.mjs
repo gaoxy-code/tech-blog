@@ -20,16 +20,16 @@ if (!token || !accountId || !siteTag) {
 const since = new Date(Date.now() - 30 * 86_400_000).toISOString().split('T')[0];
 
 const query = `
-  query TopPages($accountTag: String!, $siteTag: String!, $since: Date!) {
+  query TopPages($accountTag: String!, $since: Date!) {
     viewer {
       accounts(filter: { accountTag: $accountTag }) {
         rumPageloadEventsAdaptiveGroups(
-          filter: { siteTag: $siteTag, date_geq: $since }
-          limit: 200
+          filter: { date_geq: $since }
+          limit: 50
           orderBy: [count_DESC]
         ) {
           count
-          dimensions { requestPath }
+          dimensions { requestPath siteTag }
         }
       }
     }
@@ -44,7 +44,7 @@ try {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ query, variables: { accountTag: accountId, siteTag, since } })
+		body: JSON.stringify({ query, variables: { accountTag: accountId, since } })
 	});
 } catch (e) {
 	console.warn('[fetch-views] fetch 失敗:', e.message);
