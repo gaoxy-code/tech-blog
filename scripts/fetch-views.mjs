@@ -4,14 +4,13 @@ import { resolve, dirname } from 'node:path';
 const OUTPUT = resolve('src/lib/data/views.json');
 const token = process.env.CLOUDFLARE_API_TOKEN;
 const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
-const siteTag = process.env.CLOUDFLARE_WEB_ANALYTICS_SITE_TAG;
 
 function writeEmpty() {
 	mkdirSync(dirname(OUTPUT), { recursive: true });
 	writeFileSync(OUTPUT, JSON.stringify({}, null, 2));
 }
 
-if (!token || !accountId || !siteTag) {
+if (!token || !accountId) {
 	console.warn('[fetch-views] 環境変数が未設定のためスキップします');
 	writeEmpty();
 	process.exit(0);
@@ -19,17 +18,20 @@ if (!token || !accountId || !siteTag) {
 
 const since = new Date(Date.now() - 30 * 86_400_000).toISOString().split('T')[0];
 
+// siteTag フィルタを使わずアカウント全体を取得して /posts/* だけ合算する。
+// ビーコントークン（JS スニペットの値）と Analytics 内部の siteTag が一致せず、
+// 単一の siteTag で絞り込むとヒット 0 件になるため。
 const query = `
   query TopPages($accountTag: String!, $since: Date!) {
     viewer {
       accounts(filter: { accountTag: $accountTag }) {
         rumPageloadEventsAdaptiveGroups(
           filter: { date_geq: $since }
-          limit: 50
+          limit: 200
           orderBy: [count_DESC]
         ) {
           count
-          dimensions { requestPath siteTag }
+          dimensions { requestPath }
         }
       }
     }
@@ -68,14 +70,6 @@ if (json.errors) {
 
 const accounts = json?.data?.viewer?.accounts ?? [];
 const groups = accounts[0]?.rumPageloadEventsAdaptiveGroups ?? [];
-
-console.log(`[fetch-views][debug] since=${since} accountTagPrefix=${accountId.slice(0, 6)}... siteTagPrefix=${siteTag.slice(0, 6)}...`);
-console.log(`[fetch-views][debug] accounts.length=${accounts.length} groups.length=${groups.length}`);
-console.log('[fetch-views][debug] raw response:', JSON.stringify(json, null, 2));
-if (groups.length > 0) {
-	const sample = groups.slice(0, 10).map((g) => `${g.dimensions.requestPath} (${g.count})`);
-	console.log('[fetch-views][debug] sample paths:', sample);
-}
 
 const counts = {};
 for (const g of groups) {
