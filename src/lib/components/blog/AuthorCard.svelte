@@ -13,7 +13,7 @@
 	<div>
 		<div class="rounded-t-xl border border-border px-4 pt-4">
 			<div class="flex items-center gap-3">
-				<div class="size-16">
+				<div class="size-16 overflow-hidden rounded-full">
 					<img
 						src="/avatar.jpg"
 						alt="toishi"
@@ -42,7 +42,7 @@
 {:else}
 	<div class="rounded-xl border border-border">
 		<div class="flex items-center gap-3 p-4">
-			<div class="size-12 shrink-0">
+			<div class="size-12 shrink-0 overflow-hidden rounded-full">
 				<img src="/avatar.jpg" alt="toishi" width="48" height="48" class="size-full object-cover" />
 			</div>
 			<div class="flex min-w-0 flex-1 flex-col">
