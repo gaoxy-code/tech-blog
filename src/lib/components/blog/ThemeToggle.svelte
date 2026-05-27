@@ -29,29 +29,70 @@
 		}
 	});
 
+	function resolveDark(value: Theme): boolean {
+		if (value === 'system') {
+			return window.matchMedia('(prefers-color-scheme: dark)').matches;
+		}
+		return value === 'dark';
+	}
+
+	function applyDark(next: boolean) {
+		isDark = next;
+		document.documentElement.classList.toggle('dark', next);
+	}
+
 	$effect(() => {
 		if (theme === 'system') {
 			const mql = window.matchMedia('(prefers-color-scheme: dark)');
-			const update = () => {
-				isDark = mql.matches;
-				document.documentElement.classList.toggle('dark', isDark);
-			};
+			const update = () => applyDark(mql.matches);
 			update();
 			mql.addEventListener('change', update);
 			return () => mql.removeEventListener('change', update);
 		} else {
-			isDark = theme === 'dark';
-			document.documentElement.classList.toggle('dark', isDark);
+			applyDark(theme === 'dark');
 		}
 	});
 
-	function setTheme(value: Theme) {
-		theme = value;
+	function persist(value: Theme) {
 		if (value === 'system') {
 			localStorage.removeItem('theme');
 		} else {
 			localStorage.setItem('theme', value);
 		}
+	}
+
+	function setTheme(value: Theme, event?: MouseEvent) {
+		if (value === theme) {
+			persist(value);
+			return;
+		}
+
+		const nextDark = resolveDark(value);
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const supportsVT = typeof document.startViewTransition === 'function';
+
+		if (!supportsVT || reduceMotion || nextDark === isDark) {
+			theme = value;
+			persist(value);
+			return;
+		}
+
+		const root = document.documentElement;
+		const x = event?.clientX ?? window.innerWidth / 2;
+		const y = event?.clientY ?? window.innerHeight / 2;
+		root.style.setProperty('--theme-toggle-x', `${x}px`);
+		root.style.setProperty('--theme-toggle-y', `${y}px`);
+		root.setAttribute('data-theme-transition', '');
+
+		const transition = document.startViewTransition(() => {
+			theme = value;
+			persist(value);
+			applyDark(nextDark);
+		});
+
+		transition.finished.finally(() => {
+			root.removeAttribute('data-theme-transition');
+		});
 	}
 </script>
 
@@ -60,7 +101,7 @@
 		{#each themeOptions as option (option.value)}
 			<button
 				type="button"
-				onclick={() => setTheme(option.value)}
+				onclick={(e) => setTheme(option.value, e)}
 				aria-pressed={theme === option.value}
 				aria-label={`${option.label}テーマ`}
 				class="flex flex-1 items-center justify-center gap-1.5 rounded-sm px-3 py-2 text-sm transition-colors {theme ===
@@ -90,7 +131,7 @@
 		<DropdownMenu.Content align="end" class="w-36">
 			{#each themeOptions as option (option.value)}
 				<DropdownMenu.Item
-					onclick={() => setTheme(option.value)}
+					onclick={(e: MouseEvent) => setTheme(option.value, e)}
 					class="flex items-center justify-between"
 				>
 					<span class="flex items-center gap-2">

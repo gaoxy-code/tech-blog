@@ -138,6 +138,33 @@
 	animation: none;
 }
 
+/* テーマ切替時の円形展開アニメーション。
+   ページ遷移と区別するため、トグル時のみ html[data-theme-transition] を付与する。 */
+html[data-theme-transition]::view-transition-old(root) {
+	animation: none;
+	z-index: 0;
+}
+html[data-theme-transition]::view-transition-new(root) {
+	animation: theme-circle-reveal 500ms ease-out;
+	z-index: 1;
+}
+
+@keyframes theme-circle-reveal {
+	from {
+		clip-path: circle(0% at var(--theme-toggle-x, 50%) var(--theme-toggle-y, 50%));
+	}
+	to {
+		clip-path: circle(150% at var(--theme-toggle-x, 50%) var(--theme-toggle-y, 50%));
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html[data-theme-transition]::view-transition-old(root),
+	html[data-theme-transition]::view-transition-new(root) {
+		animation: none;
+	}
+}
+
 /* Shiki syntax highlighting - inverted theme for contrast */
 html:not(.dark) .shiki,
 html:not(.dark) .shiki span {
