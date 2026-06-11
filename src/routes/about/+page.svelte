@@ -78,8 +78,8 @@
 
 	<div class="grid grid-cols-1 items-start gap-6 md:grid-cols-[280px_1fr]">
 		<!-- LEFT: Profile card -->
-		<aside>
-			<div class="sticky top-[72px] overflow-hidden rounded-xl border border-border bg-card">
+		<aside class="md:sticky md:top-[72px]">
+			<div class="overflow-hidden rounded-xl border border-border bg-card">
 				<!-- Avatar + name -->
 				<div class="flex flex-col items-center border-b border-border px-6 pt-7 pb-5 text-center">
 					<div class="mb-3.5 size-20 overflow-hidden rounded-full border-2 border-border">

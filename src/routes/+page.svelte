@@ -1,7 +1,9 @@
 <script lang="ts">
 	import PostCard from '$lib/components/blog/PostCard.svelte';
 	import PopularPostItem from '$lib/components/blog/PopularPostItem.svelte';
+	import HeroParticles from '$lib/components/blog/HeroParticles.svelte';
 	import HeroTerminal from '$lib/components/blog/HeroTerminal.svelte';
+	import TagSphere from '$lib/components/blog/TagSphere.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { buildWebsiteLd } from '$lib/utils/jsonld';
 	import { MoveRight } from '@lucide/svelte';
@@ -19,9 +21,10 @@
 </svelte:head>
 
 <!-- Hero -->
-<section class="border-b border-border from-background to-muted/30">
+<section class="relative overflow-hidden border-b border-border from-background to-muted/30">
+	<HeroParticles />
 	<div
-		class="mx-auto flex max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:gap-12 lg:py-20"
+		class="relative mx-auto flex max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:gap-12 lg:py-20"
 	>
 		<div class="flex-1 space-y-4 sm:space-y-6">
 			<span
@@ -98,5 +101,16 @@
 				<PopularPostItem {post} rank={i + 1} />
 			{/each}
 		</ol>
+	</div>
+</section>
+
+<!-- Tag Cloud -->
+<section class="border-t border-border">
+	<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+		<div class="mb-4 text-center">
+			<h2 class="text-xl font-bold sm:text-2xl">タグから探す</h2>
+			<p class="mt-2 text-sm text-muted-foreground">ドラッグで回転、クリックでタグページへ</p>
+		</div>
+		<TagSphere tags={data.tags} />
 	</div>
 </section>

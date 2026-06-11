@@ -168,7 +168,7 @@
 		</div>
 		<span class="terminal-title ml-3">~/toishi/blog - zsh</span>
 	</div>
-	<div class="terminal-code relative leading-relaxed">
+	<div class="terminal-code relative overflow-x-auto leading-relaxed">
 		<!-- eslint-disable svelte/no-at-html-tags -->
 		<code class="invisible" aria-hidden="true">{@html fullCodeHtml}</code>
 		<code class="absolute inset-0">{@html activeHtml}</code>
