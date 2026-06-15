@@ -1,6 +1,5 @@
 <script lang="ts">
 	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import Navbar from '$lib/components/blog/Navbar.svelte';
 	import Footer from '$lib/components/blog/Footer.svelte';
 	import { onNavigate } from '$app/navigation';
@@ -20,7 +19,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 	<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
 	{#if env.PUBLIC_CF_BEACON_TOKEN}
 		<!-- Cloudflare Web Analytics -->
