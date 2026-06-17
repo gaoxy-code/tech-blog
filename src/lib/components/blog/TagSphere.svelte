@@ -215,7 +215,7 @@
 
 <div
 	bind:this={container}
-	class="h-80 w-full cursor-grab touch-pan-y select-none sm:h-96 {active ? '' : 'hidden'}"
+	class="h-80 w-full cursor-grab touch-none select-none sm:h-96 {active ? '' : 'hidden'}"
 	aria-hidden="true"
 ></div>
 
